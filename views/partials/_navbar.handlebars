@@ -1,0 +1,14 @@
+ <ul style="background: blueviolet;
+     padding-left 300px";'display:flex;'>
+        <a href="/">home</a>
+        <a href="/about">about<a/>
+    </ul>
+    
+  {{#if user}}
+    <a href="/ideas/add">add ideas</a>
+    <a href="/ideas">ideas</a>
+    <a href="/users/logout">logout</a>
+    {{else}}
+    <a href="/users/login">login</a>
+    <a href="/users/register">register</a>
+    {{/if}}
