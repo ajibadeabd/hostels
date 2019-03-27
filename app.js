@@ -1,41 +1,37 @@
 const express = require('express');
 const path = require('path')
-
 const mongoose = require("mongoose");
-
 const exphbs = require('express-handlebars')
-
 const app = express();
-
 const bodyParser = require('body-parser')
+const passport = require('passport')
 
- const passport = require('passport')
-
- //passportLocal= require('passport-local')
-
+ 
 const methodOverride = require('method-override')
 const flash = require('connect-flash')
 const session = require('express-session')
 
-//load routes
+//load route
 const ideas = require('./routes/ideas');
 const users = require('./routes/user');
 
 
 //passport config
 require('./config/passport')(passport);
-//require('./config/passport')(passport);
+//db config
+const db = require('./config/database')
 
+//map global promise - get rid of warning
 mongoose.promise=global.promise;
 
 
 //connect to mongoose
-mongoose.connect('mongodb://localhost/abd',
+mongoose.connect(db.mongoURL,
 { useNewUrlParser: true})
 .then(()=> console.log('mongodb connected'))
 .catch((err) => console.log(err));
 
-
+  
 
 
 
@@ -98,7 +94,7 @@ app.get('/ABOUT',(req,res,next) => {
 app.use('/ideas',ideas);
 
 app.use('/users',users);
-const port = 3000;
+const port =process.env.PORT || 3000;
 
 app.listen(3000,(req,res,next) => {
     console.log(`server running at port ${port}`)
