@@ -58,6 +58,7 @@ router.post('/register', (req,res) => {
                 const   newUser = new User({
                     name:req.body.name,
                     email:req.body.email,
+                    matric:req.body.matric,
                     password:req.body.password
                 });
                           
@@ -85,10 +86,5 @@ router.post('/register', (req,res) => {
     res.render('users/dashboard')
 });
 
-//log out user
-router.get('/logout',(req,res,next)=>{
-    req.logout();
-    req.flash('success_msg','you have succefully logged out');
-    res.redirect('/users/dashboard')
-})
+
 module.exports = router;

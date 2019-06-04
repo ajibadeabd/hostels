@@ -73,12 +73,22 @@
   <div class="nav-wrapper red">
     <a href=""class="brand-logo">logo</a>
  <ul id="nav-mobile" class="right hide-on-med-and-down" >
+   {{#if user}}
+   {{else}}
    <li><a href="/users/register">student</a></li>
-       <li><a href="/update">update</a></li>
+   
+   {{/if}}
+    
+       
+       <li>{{user.name}}</li>
+       {{#if user}}
+       {{else}}
         <li><a href="/admin/login" class="dropdown-button" data-activates="dropdown1">admin<i
          class='material-icons right'>arrow_drop_down</i></a></li>
+         {{/if}}
+            <li><a href="/update">update</a></li>
        {{#if user}}
-        <li><a href="/users/logout"> Logout</a></li>
+        <li><a href="/logout"> Logout</a></li>
        {{/if}}
       </ul>
       </div>

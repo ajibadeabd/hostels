@@ -14,7 +14,7 @@ const session = require('express-session')
 //load model 
 require('./models/story')
 require('./models/User')
-require('./models/Ideal')
+require('./models/admin')
 //load route
 const ideas = require('./routes/ideas');
 const users = require('./routes/user');
@@ -22,6 +22,7 @@ const stories = require('./routes/stories');
 const admin = require('./routes/admin');
 //passport config
 require('./config/passport')(passport);
+require('./config/adminpassport')(passport);
 //db config
 const db = require('./config/database')
 //hbs helpers
@@ -102,15 +103,21 @@ app.get('/ABOUT',(req,res,next) => {
 });
 
 // route for available hostel
-app.get('/available',(req,res,next) => {
+app.get('/available',ensureAuthenticated,(req,res,next) => {
     res.render('admin/available')
 });
 
 // route for booked hostel
-app.get('/booked',(req,res,next) => {
+app.get('/booked',ensureAuthenticated,(req,res,next) => {
     res.render('admin/booked')
 });
 
+//log out user
+app.get('/logout',(req,res,next)=>{
+    req.logout();
+    req.flash('success_msg','you have succefully logged out');
+    res.redirect('/')
+})
 
 app.use('/ideas',ideas);
 app.use('/stories',stories);

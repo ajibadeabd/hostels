@@ -3,7 +3,7 @@ module.exports = {
        if(req.isAuthenticated()){
            return next();
        } 
-       req.flash('error_msg', 'baba go register');
+       req.flash('error_msg', 'Please get Registered to access  this page');
        res.redirect('/users/login')
     },
     ensureGuest: function(req,res,next){

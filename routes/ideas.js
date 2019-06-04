@@ -4,10 +4,6 @@ const mongoose = require('mongoose')
 const {ensureAuthenticated} = require('../helpers/auth')
 
 
-//load idea model
-require('../models/Ideal')
-idea = mongoose.model('idea')
-
 
 //edit ideas form
 router.get('/edit/:id',ensureAuthenticated,(req,res) => {

@@ -16,6 +16,11 @@ password:{
     type:String,
     required:true
 },
+
+matric:{
+    type:Date,
+    default:Date.now
+},
 date:{
     type:Date,
     default:Date.now
