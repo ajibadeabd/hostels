@@ -11,18 +11,12 @@ User = mongoose.model('users')
 //post login form
 router.post('/login', (req,res,next) => {
     passport.authenticate('local',{
-        successRedirect: '/ideas',
+        successRedirect: '/users/dashboard',
         failureRedirect: '/users/login',
         failureFlash: true
     })(req,res,next);
  });
-// router.post('/login', (req, res, next) => {
-//     passport.authenticate('local', {
-//       successRedirect:'/ideas/register',
-//       failureRedirect: '/users/login',
-//       failureFlash: true
-//     })(req, res, next);
-//   });
+
 
 //get login form
 router.get('/login', (req,res) => {
@@ -47,6 +41,7 @@ router.post('/register', (req,res) => {
         res.render('users/register',{
             errors: errors,
             name: req.body.name,
+            matric:req.body.matric,
             email: req.body.email,
             password: req.body.password,
             confirmpassword: req.body.confirmpassword
@@ -80,21 +75,20 @@ router.post('/register', (req,res) => {
                           return;
                         });
                     });
-                  });
-                
-            }
-
-            
+                  });   
+            }            
         })
-
-     }
-    
+ }
+    });
+    //get dashboard
+    router.get('/dashboard', (req,res) => {
+    res.render('users/dashboard')
 });
 
 //log out user
-router.get('/logout',(req,res)=>{
+router.get('/logout',(req,res,next)=>{
     req.logout();
-    req.flash('success_msg','you have succefully log out');
-    res.redirect('/users/login')
+    req.flash('success_msg','you have succefully logged out');
+    res.redirect('/users/dashboard')
 })
 module.exports = router;

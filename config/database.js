@@ -4,6 +4,6 @@ if(process.env.NODE_ENV === 'production'){
     }
 }else{
     module.exports =  {mongoURL:
-        'mongodb://localhost/abd'
+        'mongodb://localhost/hotel'
 }
 }

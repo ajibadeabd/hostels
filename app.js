@@ -5,22 +5,29 @@ const exphbs = require('express-handlebars')
 const app = express();
 const bodyParser = require('body-parser')
 const passport = require('passport')
+const {ensureAuthenticated,ensureGuest} = require('./helpers/auth')
 
  
 const methodOverride = require('method-override')
 const flash = require('connect-flash')
 const session = require('express-session')
-
+//load model 
+require('./models/story')
+require('./models/User')
+require('./models/Ideal')
 //load route
 const ideas = require('./routes/ideas');
 const users = require('./routes/user');
-
-
+const stories = require('./routes/stories');
+const admin = require('./routes/admin');
 //passport config
 require('./config/passport')(passport);
 //db config
 const db = require('./config/database')
-
+//hbs helpers
+const {
+    truncate,stripTags,select
+}=require("./helpers/hbs")
 //map global promise - get rid of warning
 mongoose.promise=global.promise;
 
@@ -37,6 +44,11 @@ mongoose.connect(db.mongoURL,
 
 //handle bars middlewares
 app.engine('handlebars',exphbs({
+    helpers:{
+        truncate:truncate,
+        stripTags:stripTags,
+        select:select
+    },
     defaultLayout:'main'
 }));
 app.set('view engine','handlebars');
@@ -86,16 +98,26 @@ app.get('/',(req,res,next) => {
 
 // about route
 app.get('/ABOUT',(req,res,next) => {
-    res.render('about')
+    res.render('stories/about')
+});
+
+// route for available hostel
+app.get('/available',(req,res,next) => {
+    res.render('admin/available')
+});
+
+// route for booked hostel
+app.get('/booked',(req,res,next) => {
+    res.render('admin/booked')
 });
 
 
-
 app.use('/ideas',ideas);
-
+app.use('/stories',stories);
 app.use('/users',users);
+app.use('/admin',admin);
 const port =process.env.PORT || 3000;
 
 app.listen(3000,(req,res,next) => {
     console.log(`server running at port ${port}`)
-})
+});

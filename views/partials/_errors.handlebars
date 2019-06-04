@@ -1,8 +1,10 @@
+<div class='container center'>
 {{#if error}} 
-<div>{{error}}</div>
+<div class='red'>{{error}}</div>
 {{/if}}
 
 {{#each errors}}
-<div>{{text}}</div>
+<div class='red'>{{text}}</div>
 {{else}}
 {{/each}}
+</div>
