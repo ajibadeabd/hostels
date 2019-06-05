@@ -1,0 +1,18 @@
+
+{{#each available}}
+
+
+<DIv>
+<div>BLOCK NO:{{block}}</div>
+<div>FLAT NO:{{flat}}</div>
+<div>ROOM NO:1-{{room1}}</div>
+<div>ROOM NO:2-{{room2}}</div>
+
+<BUTTON><a href='/admin/:{{id}}'>edit</a></BUTTON>
+</DIv>
+
+<BR><BR>
+
+{{else}}
+no available hostel for now
+{{/each}}

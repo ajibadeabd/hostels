@@ -15,6 +15,7 @@ const session = require('express-session')
 require('./models/story')
 require('./models/User')
 require('./models/admin')
+require('./models/availablehostel')
 //load route
 const ideas = require('./routes/ideas');
 const users = require('./routes/user');
@@ -22,7 +23,6 @@ const stories = require('./routes/stories');
 const admin = require('./routes/admin');
 //passport config
 require('./config/passport')(passport);
-require('./config/adminpassport')(passport);
 //db config
 const db = require('./config/database')
 //hbs helpers

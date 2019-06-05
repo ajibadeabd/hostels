@@ -1,0 +1,32 @@
+<form method='post' action='/admin/:{{id}}'>
+    <fieldset>
+        
+    <div>
+   <label for='block'>BLOCK NO:</label> <input type='number' value='{{ one.block}}' length='10px' name='block' required />
+   
+    </div><br>
+    <div>
+     <label for='flat'>FLAT NO:</label><input type='text'value='{{ available.flat}}' name='flat' required />
+    </div><br>
+    <div> 
+     <label for='room1'>ROOM1 NO:</label>
+    <select name='room1'>
+       <option>available</option>
+       <option>booked</option>
+       <option>pending</option>
+   </select>
+     </div><br>
+   <div>
+         <label for='room2'>ROOM2  NO:</label>
+        <select name='room2'>
+       <option>available</option>
+       <option>booked</option>
+       <option>pending</option>
+   </select>
+  
+   </div><br>
+   <div class='red white-text center'>
+    <button class='btn'  type='submit' value='add' >save</button>
+    </div>
+    </fieldset>
+</form>
